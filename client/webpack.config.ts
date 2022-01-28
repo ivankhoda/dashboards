@@ -33,7 +33,7 @@ const config = {
     extensions: [".tsx", ".ts", ".js", ".css", ".scss"],
   },
   output: {
-    publicPath: isProduction ? "" : "/",
+    publicPath: isProduction ? "/" : "/",
     filename: "[name].js",
   },
   devServer: {
