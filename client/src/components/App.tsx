@@ -3,7 +3,6 @@ import styled from "styled-components";
 import { Dashboard } from "./Dashboard/Dashboard";
 import { Header } from "./Header/Header";
 import { Sidebar } from "./Sidebar/Sidebar";
-import { Statistics } from "./Statistics/Statistics";
 
 const StyledDiv = styled.div`
   position: relative;
@@ -18,6 +17,9 @@ const StyledDiv = styled.div`
 `;
 const StyledWorkspace = styled.div`
   grid-area: workspace;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
 `;
 export const App = () => {
   return (
@@ -27,7 +29,6 @@ export const App = () => {
         <Sidebar />
         <StyledWorkspace>
           <Dashboard />
-          <Statistics />
         </StyledWorkspace>
       </StyledDiv>
     </>

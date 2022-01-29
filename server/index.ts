@@ -1,7 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 const app = express();
-const PORT = 8000;
 
+const PORT = 8000;
+const localhost = "http://localhost:4000/";
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 const goods = ["Water", "Fire", "Wood", "Wind"];
 
 const countries = ["Russia", "China", "United States", "Spain"];
@@ -17,18 +24,18 @@ Array.prototype.pickRandom = function () {
 };
 
 interface Data {
-  item: string;
-  currentData: string;
-  previousData?: string;
+  name: string;
+  currentPrice: string;
+  previousPrice?: string;
 }
 const generateFakePrices = (items: string[], limit: number) => {
   const generateFakePrice = () => randomValueBetweenInterval(1, limit).toString();
   const values: Data[] = [];
   items.forEach((item) => {
     values.push({
-      item: item,
-      currentData: generateFakePrice(),
-      previousData: generateFakePrice(),
+      name: item,
+      currentPrice: generateFakePrice(),
+      previousPrice: generateFakePrice(),
     });
   });
   return values;
@@ -62,7 +69,7 @@ const generateQuantityOfRandomNumber = (lines: string[], interval: number) => {
 
 app.get("/prices", (req: any, res: any) => {
   const result = generateFakePrices(goods, 20000);
-
+  console.log(result);
   res.json(result);
 });
 
@@ -83,6 +90,7 @@ app.get("/", (req: any, res: any) => {
 
   res.json(result);
 });
+
 app.listen(PORT, () => {
   console.log(`⚡️[server]: Server is running at https://localhost:${PORT}`);
 });

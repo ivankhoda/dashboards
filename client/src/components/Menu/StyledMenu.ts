@@ -1,8 +1,9 @@
 import styled from "styled-components";
 
-export const StyledSidebar = styled.aside`
+export const StyledMenu = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: 208px;
+  background-color: grey;
   height: 100vh;
-  grid-area: sidebar;
 `;

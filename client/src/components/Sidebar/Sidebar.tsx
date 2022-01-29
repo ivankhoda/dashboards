@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Menu } from "../Menu/Menu";
 import { StyledSidebar } from "./StyledSidebar";
 
 const StyledLogoContainer = styled.div`
@@ -12,6 +13,7 @@ const StyledLogo = styled.h1`
   font-style: normal;
   font-size: 24px;
   text-align: center;
+  margin: 0;
 `;
 
 export const Sidebar = () => {
@@ -20,10 +22,7 @@ export const Sidebar = () => {
       <StyledLogoContainer>
         <StyledLogo>Logo</StyledLogo>
       </StyledLogoContainer>
-      <div>
-        <a href="/">Dashboard</a>
-        <a href="/">Statistics</a>
-      </div>
+      <Menu />
     </StyledSidebar>
   );
 };
