@@ -1,60 +1,22 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
+import { options } from "../ChartsHelpers";
 import { StyledChartsContainer } from "./StyledChartsContainer";
-const options = {
-  xAxis: {
-    categories: [],
-    //["Russia", "Spain", "United States", "China"],
-  },
-  chart: {
-    type: "bar",
-  },
 
-  series: [
-    {
-      dataSorting: {
-        enabled: true,
-      },
-      zoneAxis: "x",
-      zones: [
-        {
-          value: 1,
-          color: "#2100EE",
-        },
-        {
-          value: 2,
-          color: "#6900EE",
-        },
-        {
-          value: 3,
-          color: "#EE0056",
-        },
-        {
-          value: 4,
-          color: "#EE9D00",
-        },
-      ],
-
-      data: [],
-      //[100, 200, 300, 40],
-    },
-  ],
+type CountryInfo = {
+  name: string;
+  currentPrice: number;
 };
-// type CountryInfo = {
-//   name: string;
-//   currentValue: number;
-// };
-export const ChartsContainer = () => {
-  const [data, setData] = useState();
-  const [chartData, setChartData] = useState(options);
-  // const pushCountriesToOptions = (data: CountryInfo[]) => {
-  //   data.forEach((item) => {
-  //     return options.xAxis.categories.push(item.name);
-  //   });
-  //   return;
-  // };
 
+const sortData = (arr: CountryInfo[]) => {
+  return arr.sort((a: CountryInfo, b: CountryInfo) => (a.currentPrice < b.currentPrice ? 1 : -1));
+};
+
+export const ChartsContainer = () => {
+  const [data, setData] = useState<CountryInfo[]>([]);
+
+  const [chartData, setChartData] = useState({});
   useEffect(() => {
     const fetchCountriesData = async () => {
       const result = await fetch("http://localhost:8000/countries", {
@@ -62,18 +24,36 @@ export const ChartsContainer = () => {
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
       });
+
       setData(await result.json());
     };
 
     fetchCountriesData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(data);
-  console.log(chartData);
+  const countryList: string[] = [];
+  const valueList: number[] = [];
+  sortData(data).forEach((country) => {
+    countryList.push(country.name), valueList.push(country.currentPrice);
+  });
+  const newAxis = {
+    categories: countryList,
+  };
+  const newValues = {
+    data: valueList,
+  };
+  const newOptions = { ...options, xAxis: newAxis, series: [newValues] };
+  setChartData(newOptions);
+
+  // console.log(newOptions, "new options");
+
+  // console.log(data, "data in usestate");
 
   return (
     <StyledChartsContainer>
-      <HighchartsReact highcharts={Highcharts} options={options} />
+      <HighchartsReact highcharts={Highcharts} options={chartData} allowChartUpdate={true} />
     </StyledChartsContainer>
   );
 };
