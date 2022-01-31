@@ -1,7 +1,7 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
-import { options } from "../ChartsHelpers";
+import { barChartOptions } from "../ChartsHelpers";
 import { StyledChartsContainer } from "./StyledChartsContainer";
 
 type CountryInfo = {
@@ -58,12 +58,11 @@ export const ChartsContainer = () => {
       };
 
       const newOptions = {
-        ...options,
+        ...barChartOptions,
         xAxis: newAxis,
         series: [newValues],
       };
-      console.log(options);
-      console.log(newOptions);
+
       setChartData(newOptions);
     };
 

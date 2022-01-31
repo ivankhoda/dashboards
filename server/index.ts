@@ -49,10 +49,13 @@ const calculateIntervals = (point1: number, point2: number) => {
 };
 
 const lines = ["Line 1", "Line 2", "Line 3"];
-
+type IntervalInfo = {
+  interval: number;
+  price: number;
+};
 const generateQuantityOfRandomNumber = (lines: string[], interval: number) => {
-  const generateFakePrice = () => randomValueBetweenInterval(1, 150).toString();
-  const values: any = [];
+  const generateFakePrice = () => randomValueBetweenInterval(1, 150);
+  const values: IntervalInfo[] = [];
   const dataSets: any = [];
   for (let i = 0; i <= interval; i++) {
     values.push({ interval: i, price: generateFakePrice() });

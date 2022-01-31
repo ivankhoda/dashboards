@@ -4,7 +4,7 @@ export const selectChartType = (type: string) => {
   };
 };
 
-export const options = {
+export const barChartOptions = {
   yAxis: {
     max: 10000,
     tickInterval: 5000,
