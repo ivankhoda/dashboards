@@ -6,13 +6,13 @@ export const selectChartType = (type: string) => {
 
 export const options = {
   xAxis: {
-    categories: ["Russia", "China"],
+    categories: [],
   },
   chart: selectChartType("bar"),
 
   series: [
     {
-      data: [100, 300],
+      data: [],
     },
   ],
 };

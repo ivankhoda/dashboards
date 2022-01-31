@@ -25,11 +25,11 @@ Array.prototype.pickRandom = function () {
 
 interface Data {
   name: string;
-  currentPrice: string;
-  previousPrice?: string;
+  currentPrice: number;
+  previousPrice?: number;
 }
 const generateFakePrices = (items: string[], limit: number) => {
-  const generateFakePrice = () => randomValueBetweenInterval(1, limit).toString();
+  const generateFakePrice = () => randomValueBetweenInterval(1, limit);
   const values: Data[] = [];
   items.forEach((item) => {
     values.push({

@@ -14,7 +14,7 @@ const sortData = (arr: CountryInfo[]) => {
 };
 
 export const ChartsContainer = () => {
-  const [data, setData] = useState<CountryInfo[]>([]);
+  //const [data, setData] = useState<CountryInfo[]>([]);
 
   const [chartData, setChartData] = useState({});
   useEffect(() => {
@@ -24,28 +24,29 @@ export const ChartsContainer = () => {
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
       });
+      const rawData = await result.json();
+      const countryList: string[] = [];
+      const valueList: number[] = [];
+      sortData(rawData).forEach((country) => {
+        countryList.push(country.name), valueList.push(country.currentPrice);
+      });
+      const newAxis = {
+        categories: countryList,
+      };
+      const newValues = {
+        data: valueList,
+      };
 
-      setData(await result.json());
+      const newOptions = { ...options, xAxis: newAxis, series: [newValues] };
+      console.log(options);
+      console.log(newOptions);
+      setChartData(newOptions);
     };
 
     fetchCountriesData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  const countryList: string[] = [];
-  const valueList: number[] = [];
-  sortData(data).forEach((country) => {
-    countryList.push(country.name), valueList.push(country.currentPrice);
-  });
-  const newAxis = {
-    categories: countryList,
-  };
-  const newValues = {
-    data: valueList,
-  };
-  const newOptions = { ...options, xAxis: newAxis, series: [newValues] };
-  setChartData(newOptions);
 
   // console.log(newOptions, "new options");
 
