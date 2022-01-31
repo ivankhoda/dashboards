@@ -14,8 +14,6 @@ const sortData = (arr: CountryInfo[]) => {
 };
 
 export const ChartsContainer = () => {
-  //const [data, setData] = useState<CountryInfo[]>([]);
-
   const [chartData, setChartData] = useState({});
   useEffect(() => {
     const fetchCountriesData = async () => {
@@ -34,10 +32,36 @@ export const ChartsContainer = () => {
         categories: countryList,
       };
       const newValues = {
+        zoneAxis: "x",
+        dataSorting: {
+          enabled: true,
+        },
+        zones: [
+          {
+            value: 1,
+            color: "#2100EE",
+          },
+          {
+            value: 2,
+            color: "#6900EE",
+          },
+          {
+            value: 3,
+            color: "#EE0056",
+          },
+          {
+            value: 4,
+            color: "#EE9D00",
+          },
+        ],
         data: valueList,
       };
 
-      const newOptions = { ...options, xAxis: newAxis, series: [newValues] };
+      const newOptions = {
+        ...options,
+        xAxis: newAxis,
+        series: [newValues],
+      };
       console.log(options);
       console.log(newOptions);
       setChartData(newOptions);
@@ -48,13 +72,9 @@ export const ChartsContainer = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // console.log(newOptions, "new options");
-
-  // console.log(data, "data in usestate");
-
   return (
     <StyledChartsContainer>
-      <HighchartsReact highcharts={Highcharts} options={chartData} allowChartUpdate={true} />
+      <HighchartsReact highcharts={Highcharts} options={chartData} />
     </StyledChartsContainer>
   );
 };

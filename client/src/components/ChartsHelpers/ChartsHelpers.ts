@@ -5,9 +5,15 @@ export const selectChartType = (type: string) => {
 };
 
 export const options = {
+  yAxis: {
+    max: 10000,
+    tickInterval: 5000,
+  },
+
   xAxis: {
     categories: [],
   },
+
   chart: selectChartType("bar"),
 
   series: [
