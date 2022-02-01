@@ -55,15 +55,18 @@ type IntervalInfo = {
 };
 const generateQuantityOfRandomNumber = (lines: string[], interval: number) => {
   const generateFakePrice = () => randomValueBetweenInterval(1, 150);
-  const values: IntervalInfo[] = [];
+
   const dataSets: any = [];
-  for (let i = 0; i <= interval; i++) {
-    values.push({ interval: i, price: generateFakePrice() });
-  }
+
   lines.forEach((line) => {
+    const values: number[] = [];
+    for (let i = 0; i <= interval; i++) {
+      const price = generateFakePrice();
+      values.push(price);
+    }
     dataSets.push({
-      line: line,
-      prices: values,
+      name: line,
+      data: values,
     });
   });
 

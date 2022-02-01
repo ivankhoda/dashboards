@@ -22,6 +22,8 @@ export const barChartOptions = {
     },
   ],
 };
+const dateStart = Date.UTC(2022, 1, 2, 22, 10);
+const dateEnd = Date.UTC(2022, 1, 2, 23, 20);
 
 export const linearChartOptions = {
   title: {
@@ -45,30 +47,20 @@ export const linearChartOptions = {
 
   xAxis: {
     type: "datetime",
-    // dateTimeLabelFormats: {
-    //   minute: "%d %b %Y %H:%M",
-    // },
-    // startOnTick: true,
-    // endOnTick: true,
-    // showLastLabel: true,
-    // labels: {
-    //   rotation: 0,
-    // },
   },
-  //  categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
-  // },
+
   series: [
     {
-      data: [1, 2, 3, 4, 8, 6, 7, 12, 9],
+      data: [1, 2, 3, 4, 30, 6, 7, 12, 9],
       name: "Line 1",
       color: "#FF0000",
       tooltip: {
         valueDecimals: 1,
         valueSuffix: "$",
       },
-      pointStart: Date.UTC(2022, 0, 1),
-      pointEnd: Date.UTC(2022, 2, 20),
-      pointInterval: 36e5,
+      pointStart: dateStart,
+      pointEnd: dateEnd,
+      pointInterval: dateEnd - dateStart,
     },
     {
       data: [5, 6, 7, 8, 9, 10, 11, 20, 13],
@@ -78,9 +70,9 @@ export const linearChartOptions = {
         valueDecimals: 1,
         valueSuffix: "$",
       },
-      pointStart: Date.UTC(2022, 0, 1),
-      pointEnd: Date.UTC(2022, 2, 20),
-      pointInterval: 36e5,
+      pointStart: dateStart,
+      pointEnd: dateEnd,
+      pointInterval: dateEnd - dateStart,
     },
     {
       data: [9, 10, 11, 12, 8, 14, 15, 16, 17],
@@ -90,9 +82,9 @@ export const linearChartOptions = {
         valueDecimals: 1,
         valueSuffix: "$",
       },
-      pointStart: Date.UTC(2022, 0, 1),
-      pointEnd: Date.UTC(2022, 2, 20),
-      pointInterval: 36e5,
+      pointStart: dateStart,
+      pointEnd: dateEnd,
+      pointInterval: dateEnd - dateStart,
     },
   ],
 };
