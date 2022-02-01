@@ -72,7 +72,7 @@ const generateQuantityOfRandomNumber = (lines: string[], interval: number) => {
 
 app.get("/prices", (req: any, res: any) => {
   const result = generateFakePrices(goods, 20000);
-  console.log(result);
+
   res.json(result);
 });
 
