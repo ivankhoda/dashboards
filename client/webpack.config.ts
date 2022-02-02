@@ -27,6 +27,11 @@ const config = {
           "css-loader",
         ],
       },
+
+      {
+        test: /\.(gif|svg|jpg|png)$/,
+        loader: "file-loader",
+      },
     ],
   },
   resolve: {

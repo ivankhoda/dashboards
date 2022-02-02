@@ -4,6 +4,6 @@ export const StyledMenu = styled.div`
   display: flex;
   flex-direction: column;
   min-width: 208px;
-  background-color: grey;
+  background: #ffffff;
   height: 100vh;
 `;

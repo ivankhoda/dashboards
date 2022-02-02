@@ -47,9 +47,6 @@ export const linearChartOptions = {
     align: "center",
     verticalAlign: "top",
     layout: "horizontal",
-    x: 70,
-    y: 70,
-    floating: true,
   },
 
   xAxis: {

@@ -11,6 +11,11 @@ const valueComparison = (arr: number[]) => {
 
 export const LinearChartContainer = () => {
   const [chartData, setChartData] = useState(linearChartOptions);
+  const [legendCoordinates] = useState({
+    align: "center",
+    verticalAlign: "top",
+    layout: "horizontal",
+  });
   const dateStart = Date.UTC(2022, 1, 2, 22, 10);
   const dateEnd = Date.UTC(2022, 1, 2, 23, 20);
   const suffix = "!";
@@ -23,25 +28,19 @@ export const LinearChartContainer = () => {
         //body: JSON.stringify({ intervals: 10 }),
       });
       const rawData = await result.json();
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      //const maxValue: number;
+
       const maxValues: number[] = [];
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       rawData.forEach((element: any) => {
         const maxValue: number = valueComparison(element.data);
         maxValues.push(maxValue);
       });
-      console.log(valueComparison(maxValues));
+
+      console.log(legendCoordinates);
       const newOptions = {
         ...linearChartOptions,
-        legend: {
-          align: "center",
-          verticalAlign: "top",
-          layout: "horizontal",
-          x: 70,
-          y: 70,
-          floating: true,
-        },
+        legend: legendCoordinates,
         plotOptions: {
           series: {
             marker: {
@@ -58,11 +57,12 @@ export const LinearChartContainer = () => {
         },
         series: rawData,
       };
-      console.log(newOptions, "newOpt");
-      console.log(rawData, "raw");
+
       setChartData(newOptions);
     };
     fetchData();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dateEnd, dateStart]);
 
   return (

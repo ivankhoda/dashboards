@@ -5,7 +5,7 @@ import { StyledSidebar } from "./StyledSidebar";
 
 const StyledLogoContainer = styled.div`
   min-width: 208px;
-  min-height: 60px;
+  background: #ffffff;
 `;
 const StyledLogo = styled.h1`
   font-family: Gropled;
@@ -13,6 +13,7 @@ const StyledLogo = styled.h1`
   font-style: normal;
   font-size: 24px;
   text-align: center;
+  min-height: 56px;
   margin: 0;
 `;
 
