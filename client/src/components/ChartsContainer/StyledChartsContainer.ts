@@ -1,7 +1,10 @@
 import styled from "styled-components";
 
 export const StyledChartsContainer = styled.div`
-  display: flex;
+  grid-area: barChart;
+  display: grid;
+  max-width: 502px;
+  max-height: 302px;
   .highcharts-color-0 {
     //fill: #c4688c;
     background-color: red;

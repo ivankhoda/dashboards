@@ -2,7 +2,7 @@ import React from "react";
 import { ChartsContainer } from "../ChartsContainer/ChartsContainer";
 import { LinearChartContainer } from "../LinearChartContainer/LinearChartContainer";
 import { PricesContainer } from "../PricesContainer/PricesContainer";
-import { StyledDashboard } from "./StyledDashboard";
+import { StyledDashboard, StyledWorkingPanel } from "./StyledDashboard";
 
 export const Dashboard = () => {
   return (
@@ -10,12 +10,12 @@ export const Dashboard = () => {
       <StyledDashboard>
         <h2>Good morning</h2>
         <div>Date</div>
-        <div>
+        <StyledWorkingPanel>
           <PricesContainer />
           <ChartsContainer />
 
           <LinearChartContainer />
-        </div>
+        </StyledWorkingPanel>
       </StyledDashboard>
     </>
   );

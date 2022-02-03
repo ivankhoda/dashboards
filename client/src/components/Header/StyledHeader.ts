@@ -5,5 +5,4 @@ export const StyledHeader = styled.header`
   flex-direction: column;
   grid-area: header;
   background: #efefff;
-  //min-height: 60px;
 `;
