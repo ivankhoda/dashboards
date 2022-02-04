@@ -17,7 +17,7 @@ const StyledDiv = styled.div`
 `;
 const StyledWorkspace = styled.div`
   grid-area: workspace;
-  height: 100vh;
+
   width: 100vw;
   display: flex;
 `;

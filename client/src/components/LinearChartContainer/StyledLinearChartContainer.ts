@@ -5,4 +5,7 @@ export const StyledLinearChartContainer = styled.div`
   grid-area: linearChart;
   border: 0.5px solid #e9e9ff;
   border-radius: 8px;
+  .highcharts-root {
+    border-radius: 8px;
+  }
 `;

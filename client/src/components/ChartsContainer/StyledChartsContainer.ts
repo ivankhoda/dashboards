@@ -5,6 +5,9 @@ export const StyledChartsContainer = styled.div`
 
   width: 502px;
   height: 302px;
+  .highcharts-root {
+    border-radius: 8px;
+  }
   .highcharts-color-0 {
     //fill: #c4688c;
     background-color: red;

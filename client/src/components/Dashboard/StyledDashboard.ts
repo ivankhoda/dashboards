@@ -4,6 +4,11 @@ export const StyledDashboard = styled.div`
   background-color: #e5e5e5;
 
   padding: 24px;
+  .ant-picker-range {
+    max-width: 241px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+  }
 `;
 export const StyledWorkingPanel = styled.div`
 

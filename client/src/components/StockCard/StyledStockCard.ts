@@ -57,6 +57,9 @@ export const StyledStockCard = styled.div`
     color: #8c8c8c;
     font-family: Roboto;
     font-size: 14px;
+    margin-top: 0;
+    padding-top: 4px;
+    border-top: 1px dashed #e1e1e1;
     //text-indent: 30px;
   }
   h4 {
