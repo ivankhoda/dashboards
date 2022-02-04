@@ -2,12 +2,15 @@ import styled from "styled-components";
 
 export const StyledChartsContainer = styled.div`
   grid-area: barChart;
-  display: grid;
-  max-width: 502px;
-  max-height: 302px;
+
+  width: 502px;
+  height: 302px;
   .highcharts-color-0 {
     //fill: #c4688c;
     background-color: red;
+  }
+  .highcharts-background {
+    max-height: 302px;
   }
   .highcharts-color-1 {
     stroke: #b3597c;

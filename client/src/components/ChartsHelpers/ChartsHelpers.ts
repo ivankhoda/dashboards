@@ -14,7 +14,7 @@ export const barChartOptions = {
     categories: [],
   },
 
-  chart: selectChartType("bar"),
+  chart: { type: "bar", height: 300, widht: 500 },
 
   series: [
     {
@@ -26,6 +26,11 @@ const dateStart = Date.UTC(2022, 1, 2, 22, 10);
 const dateEnd = Date.UTC(2022, 1, 2, 23, 20);
 
 export const linearChartOptions = {
+  chart: {
+    height: 400,
+    width: 1024,
+    type: "line",
+  },
   title: {
     text: "",
   },
