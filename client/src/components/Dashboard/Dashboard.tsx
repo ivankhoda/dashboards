@@ -1,19 +1,50 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css";
-import React from "react";
+import React, { useState } from "react";
 import { ChartsContainer } from "../ChartsContainer/ChartsContainer";
+import { oneDay, oneHour } from "../ChartsHelpers";
 import { LinearChartContainer } from "../LinearChartContainer/LinearChartContainer";
 import { PricesContainer } from "../PricesContainer/PricesContainer";
 import { StyledDashboard, StyledWorkingPanel } from "./StyledDashboard";
 export const Dashboard = () => {
-  //require("antd/dist/antd.css");
-  // const [date, setRange] = useState([]);
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const onChange = (range: any) => console.log(range[1]._d - range[0]._d, "changed");
-  // const dateTimeOnChange = (date: [Moment, Moment] | null, dateString: [string, string]): void => {
-  //   console.log(date);
-  //   console.log(dateString);
-  // };
+  //<moment.Moment>
+
+  const [chartOptions, setChartOptions] = useState({
+    dateStart: Date.now() - oneDay * 7,
+    dateEnd: Date.now(),
+    pointInterval: oneDay,
+    intervals: 8,
+  });
+
+  const calculateInterval = (firstDate: any, nextDate: any) => {
+    const differenceInDays = (nextDate - firstDate) / oneDay;
+    const differenceInHours = (nextDate - firstDate) / oneHour;
+    const wholeDay = 1;
+
+    let interval;
+    let time;
+    differenceInDays >= wholeDay
+      ? ((interval = Math.floor(differenceInDays)), (time = "days"))
+      : ((interval = Math.floor(differenceInHours)), (time = "hours"));
+
+    return { interval, time };
+  };
+
+  const onChange = (range: any) => {
+    const nextDate = range[1]._d;
+    const firstDate = range[0]._d;
+    const intervals = calculateInterval(firstDate, nextDate);
+    const newChartOptions = {
+      dateStart: firstDate,
+      dateEnd: nextDate,
+      pointInterval: intervals.time === "days" ? oneDay : oneHour,
+      intervals: intervals.interval,
+    };
+    console.log(newChartOptions, "new chart opts");
+    setChartOptions(newChartOptions);
+  };
+
   const { RangePicker } = DatePicker;
   return (
     <>
@@ -28,7 +59,12 @@ export const Dashboard = () => {
           <PricesContainer />
           <ChartsContainer />
 
-          <LinearChartContainer />
+          <LinearChartContainer
+            intervals={chartOptions.intervals}
+            dateStart={chartOptions.dateStart}
+            dateEnd={chartOptions.dateEnd}
+            pointInterval={chartOptions.pointInterval}
+          />
         </StyledWorkingPanel>
       </StyledDashboard>
     </>

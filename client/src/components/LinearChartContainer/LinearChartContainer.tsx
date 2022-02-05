@@ -8,24 +8,47 @@ const valueComparison = (arr: number[]) => {
   const max = Math.max(...arr);
   return max;
 };
-
-export const LinearChartContainer = () => {
-  const [chartData, setChartData] = useState(linearChartOptions);
+interface IntervalInfo {
+  intervals: number;
+  dateStart: number;
+  dateEnd: number;
+  pointInterval: number;
+}
+///{ ...props }: IntervalInfo
+export const LinearChartContainer = (props: IntervalInfo) => {
+  const { pointInterval, dateStart, dateEnd, intervals } = props;
+  const suffix = "!";
   const [legendCoordinates] = useState({
     align: "center",
     verticalAlign: "top",
     layout: "horizontal",
   });
-  const dateStart = Date.UTC(2022, 1, 2, 22, 10);
-  const dateEnd = Date.UTC(2022, 1, 2, 23, 20);
-  const suffix = "!";
+
+  const [chartData, setChartData] = useState({
+    ...linearChartOptions,
+    legend: legendCoordinates,
+    plotOptions: {
+      series: {
+        marker: {
+          enabled: false,
+        },
+        tooltip: {
+          valueDecimals: 1,
+          valueSuffix: suffix,
+        },
+        pointStart: dateStart,
+        pointEnd: dateEnd,
+        pointInterval: pointInterval,
+      },
+    },
+  });
+
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch("http://localhost:8000/lines", {
+      const result = await fetch(`http://localhost:8000/lines?from=${dateStart}to=${dateEnd}`, {
         method: "GET",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
-        //body: JSON.stringify({ intervals: 10 }),
       });
       const rawData = await result.json();
 
@@ -37,7 +60,6 @@ export const LinearChartContainer = () => {
         maxValues.push(maxValue);
       });
 
-      console.log(legendCoordinates);
       const newOptions = {
         ...linearChartOptions,
         legend: legendCoordinates,
@@ -52,7 +74,7 @@ export const LinearChartContainer = () => {
             },
             pointStart: dateStart,
             pointEnd: dateEnd,
-            pointInterval: dateEnd - dateStart,
+            pointInterval: pointInterval,
           },
         },
         series: rawData,
@@ -63,7 +85,7 @@ export const LinearChartContainer = () => {
     fetchData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateEnd, dateStart]);
+  }, [dateEnd, dateStart, pointInterval, intervals]);
 
   return (
     <StyledLinearChartContainer>

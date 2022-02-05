@@ -3,6 +3,10 @@ export const selectChartType = (type: string) => {
     type: type,
   };
 };
+export const oneDay = 24 * 60 * 60 * 1000;
+export const oneHour = 60 * 60 * 1000;
+const dateStart = Date.now() - oneDay * 2;
+const dateEnd = Date.now();
 
 export const barChartOptions = {
   yAxis: {
@@ -22,8 +26,6 @@ export const barChartOptions = {
     },
   ],
 };
-const dateStart = Date.UTC(2022, 1, 2, 22, 10);
-const dateEnd = Date.UTC(2022, 1, 2, 23, 20);
 
 export const linearChartOptions = {
   chart: {
@@ -45,7 +47,7 @@ export const linearChartOptions = {
       },
       pointStart: dateStart,
       pointEnd: dateEnd,
-      pointInterval: dateEnd - dateStart,
+      pointInterval: oneDay,
     },
   },
   legend: {

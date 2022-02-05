@@ -60,7 +60,7 @@ const generateQuantityOfRandomNumber = (lines: string[], interval: number) => {
 
   lines.forEach((line) => {
     const values: number[] = [];
-    for (let i = 0; i <= interval; i++) {
+    for (let i = 0; i < interval; i++) {
       const price = generateFakePrice();
       values.push(price);
     }
@@ -80,7 +80,9 @@ app.get("/prices", (req: any, res: any) => {
 });
 
 app.get("/lines", (req: any, res: any) => {
-  const result = generateQuantityOfRandomNumber(lines, 10);
+  console.log(req.query);
+  //const interval = req.query.interval;
+  const result = generateQuantityOfRandomNumber(lines, 3);
 
   res.json(result);
 });
