@@ -1,11 +1,18 @@
 import React from "react";
+import { DashBoardIcon } from "./DashboardIcon";
 import { StyledLink } from "./StyledLink";
 
-export const MenuLink = () => {
+type LinkProps = {
+  linkTo: string;
+  text: string;
+};
+
+export const MenuLink = (props: LinkProps) => {
+  const { linkTo, text } = props;
+
   return (
-    <>
-      <StyledLink>Dashboard</StyledLink>
-      <StyledLink>Statistics</StyledLink>
-    </>
+    <StyledLink to={`${linkTo}`}>
+      <DashBoardIcon type={text} /> {text}
+    </StyledLink>
   );
 };

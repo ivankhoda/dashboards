@@ -4,6 +4,7 @@ import { StyledPricesContainer } from "./StyledPricesContainer";
 
 export const PricesContainer = () => {
   const [prices, setPrices] = useState<StockInfo[]>([]);
+
   useEffect(() => {
     const fetchGoodsPrices = async () => {
       const result = await fetch("http://localhost:8000/prices", {
@@ -28,7 +29,9 @@ export const PricesContainer = () => {
           />
         ))
       ) : (
-        <div>Empty</div>
+        <div>
+          <h1>Loading...</h1>
+        </div>
       )}
     </StyledPricesContainer>
   );

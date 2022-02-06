@@ -78,11 +78,16 @@ app.get("/prices", (req: any, res: any) => {
 
   res.json(result);
 });
+app.get("/prices?", (req: any, res: any) => {
+  const result = generateFakePrices(goods, 20000);
+
+  res.json(result);
+});
 
 app.get("/lines", (req: any, res: any) => {
-  console.log(req.query);
-  //const interval = req.query.interval;
-  const result = generateQuantityOfRandomNumber(lines, 3);
+  const interval = req.query.interval;
+
+  const result = generateQuantityOfRandomNumber(lines, interval);
 
   res.json(result);
 });

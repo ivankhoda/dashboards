@@ -1,5 +1,26 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
-
-export const StyledLink = styled.a`
+export const StyledLink = styled(Link)`
   background: #ececff;
+  font-style: "Roboto";
+  color: #000000;
+  text-decoration: none;
+  background-color: transparent;
+  outline: none;
+  cursor: pointer;
+  transition: color 0.3s;
+  -webkit-text-decoration-skip: objects;
+  line-height: 22px;
+  min-height: 40px;
+  padding-left: 16px;
+
+  display: grid;
+  align-items: center;
+  grid-template-columns: 15px 2fr;
+  grid-gap: 10px;
+
+  &:hover {
+    background: #ececff;
+    border-right: 4px ridge #8f00ff;
+  }
 `;

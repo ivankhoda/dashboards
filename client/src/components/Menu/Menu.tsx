@@ -1,11 +1,11 @@
 import React from "react";
 import { MenuLink } from "../Link/Link";
 import { StyledMenu } from "./StyledMenu";
-
 export const Menu = () => {
   return (
     <StyledMenu>
-      <MenuLink></MenuLink>
+      <MenuLink linkTo="/" text="Dashboard" />
+      <MenuLink linkTo="/stats" text="Statistics" />
     </StyledMenu>
   );
 };

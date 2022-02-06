@@ -7,9 +7,8 @@ import { oneDay, oneHour } from "../ChartsHelpers";
 import { LinearChartContainer } from "../LinearChartContainer/LinearChartContainer";
 import { PricesContainer } from "../PricesContainer/PricesContainer";
 import { StyledDashboard, StyledWorkingPanel } from "./StyledDashboard";
-export const Dashboard = () => {
-  //<moment.Moment>
 
+export const Dashboard = () => {
   const [chartOptions, setChartOptions] = useState({
     dateStart: Date.now() - oneDay * 7,
     dateEnd: Date.now(),
@@ -32,8 +31,9 @@ export const Dashboard = () => {
   };
 
   const onChange = (range: any) => {
-    const nextDate = range[1]._d;
     const firstDate = range[0]._d;
+    const nextDate = range[1]._d;
+
     const intervals = calculateInterval(firstDate, nextDate);
     const newChartOptions = {
       dateStart: firstDate,
@@ -41,7 +41,7 @@ export const Dashboard = () => {
       pointInterval: intervals.time === "days" ? oneDay : oneHour,
       intervals: intervals.interval,
     };
-    console.log(newChartOptions, "new chart opts");
+
     setChartOptions(newChartOptions);
   };
 

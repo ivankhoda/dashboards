@@ -1,8 +1,11 @@
 import React from "react";
+import { Route, Routes } from "react-router";
+import { HashRouter } from "react-router-dom";
 import styled from "styled-components";
 import { Dashboard } from "./Dashboard/Dashboard";
 import { Header } from "./Header/Header";
 import { Sidebar } from "./Sidebar/Sidebar";
+import { Statistics } from "./Statistics/Statistics";
 
 const StyledDiv = styled.div`
   position: relative;
@@ -22,15 +25,23 @@ const StyledWorkspace = styled.div`
   display: flex;
 `;
 export const App = () => {
+  const routes = [
+    { path: "/", name: "Dashboard", Component: <Dashboard /> },
+    { path: "/stats", name: "Settings", Component: <Statistics /> },
+  ];
   return (
-    <>
+    <HashRouter>
       <StyledDiv>
         <Header />
         <Sidebar />
         <StyledWorkspace>
-          <Dashboard />
+          <Routes>
+            {routes.map(({ path, Component }) => (
+              <Route key={path} path={path} element={Component} />
+            ))}
+          </Routes>
         </StyledWorkspace>
       </StyledDiv>
-    </>
+    </HashRouter>
   );
 };
