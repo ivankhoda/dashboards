@@ -21,7 +21,7 @@ export const Sidebar = () => {
   return (
     <StyledSidebar>
       <StyledLogoContainer>
-        <StyledLogo>Logo</StyledLogo>
+        <StyledLogo>.Logo</StyledLogo>
       </StyledLogoContainer>
       <Menu />
     </StyledSidebar>

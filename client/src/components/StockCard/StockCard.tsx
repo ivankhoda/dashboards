@@ -26,7 +26,6 @@ export const StockCard = (props: StockInfo) => {
               {numberTofixedDigits(difference, 2)}%
             </p>
           </div>
-
           <p className="stockCard__pricegoup_previous">{previousPrice}</p>
         </div>
       </StyledStockCard>

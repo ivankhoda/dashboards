@@ -20,7 +20,6 @@ const StyledDiv = styled.div`
 `;
 const StyledWorkspace = styled.div`
   grid-area: workspace;
-
   display: flex;
 `;
 export const App = () => {
