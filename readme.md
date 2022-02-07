@@ -29,21 +29,17 @@ npm run dev
 npm run start
 ```
 
-## Help
-
-Any advise for common problems or issues.
-
-```
-command to run if program contains helper info
-```
-
 ## Version History
 
 - 0.1
   - Initial Release
 
-## Tech debts
+## Tech debts/bugs
 
 - Redux doesn't update state immediately (TODO: Add context provider)
 - Date picker range works the wrong way (TODO: Fix)
 - No pagination at the table component (TODO: Fix)
+
+## Help
+
+You know how to find me:)
