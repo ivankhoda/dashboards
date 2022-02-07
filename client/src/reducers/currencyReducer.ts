@@ -8,7 +8,6 @@ const initialState = {
 export const setCurrency = (state = initialState.usd, action: { type: string; payload?: number }) => {
   switch (action.type) {
     case EURO:
-      console.log(action);
       return initialState.euro;
     case USD:
       console.log(action);

@@ -1,23 +1,13 @@
 import React from "react";
+import { checkIfValueIsNegative, getDifference, numberTofixedDigits, StockInfo } from "../StockInfoHelpers";
 import { Caret, Icon } from "./Icons";
 import { StyledStockCard } from "./StyledStockCard";
-export type StockInfo = {
-  index?: number;
-  name: string;
-  currentPrice: number;
-  previousPrice: number;
-};
 
 export const StockCard = (props: StockInfo) => {
   const { name, currentPrice, previousPrice } = props;
-  const getDifference = (currentValue: number, previousValue: number) => {
-    const result = ((currentValue - previousValue) / currentValue) * 100.0;
 
-    return result;
-  };
   const difference = getDifference(currentPrice, previousPrice);
-  const numberTofixedDigits = (num: number, digits: number) => num.toFixed(digits);
-  const checkIfValueIsNegative = (value: number) => (value >= 0 ? "positive" : "negative");
+
   return (
     <>
       <StyledStockCard>

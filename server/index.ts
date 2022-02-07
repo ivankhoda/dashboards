@@ -13,6 +13,24 @@ const goods = ["Water", "Fire", "Wood", "Wind"];
 
 const countries = ["Russia", "China", "United States", "Spain"];
 
+const rows = [
+  "Row1",
+  "Row2",
+  "Row3",
+  "Row4",
+  "Row5",
+  "Row6",
+  "Row7",
+  "Row8",
+  "Row9",
+  "Row10",
+  "Row11",
+  "Row12",
+  "Row13",
+  "Row14",
+  "Row15",
+];
+
 const randomInt = (range: number) => Math.floor(Math.random() * range);
 const randomValueBetweenInterval = (max: number, min: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 
@@ -39,13 +57,6 @@ const generateFakePrices = (items: string[], limit: number) => {
     });
   });
   return values;
-};
-
-//QTY of random numbers
-//random numbers
-
-const calculateIntervals = (point1: number, point2: number) => {
-  const totalPoints = point1 > point2 ? point1 - point2 : point2 - point1;
 };
 
 const lines = ["Line 1", "Line 2", "Line 3"];
@@ -78,8 +89,9 @@ app.get("/prices", (req: any, res: any) => {
 
   res.json(result);
 });
-app.get("/prices?", (req: any, res: any) => {
-  const result = generateFakePrices(goods, 20000);
+
+app.get("/statistics", (req: any, res: any) => {
+  const result = generateFakePrices(rows, 20000);
 
   res.json(result);
 });

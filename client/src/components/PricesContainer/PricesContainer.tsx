@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { StockCard, StockInfo } from "../StockCard/StockCard";
+import { StockCard } from "../StockCard/StockCard";
+import { StockInfo } from "../StockInfoHelpers";
 import { StyledPricesContainer } from "./StyledPricesContainer";
 
 export const PricesContainer = () => {

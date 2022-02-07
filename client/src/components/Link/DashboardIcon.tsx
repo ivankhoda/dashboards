@@ -6,7 +6,7 @@ type IconInfo = {
 
 export const DashBoardIcon = (props: IconInfo) => {
   const { type } = props;
-  console.log(type);
+
   const renderSwitch = (arg: string) => {
     switch (arg) {
       case "Dashboard":

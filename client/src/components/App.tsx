@@ -21,7 +21,6 @@ const StyledDiv = styled.div`
 const StyledWorkspace = styled.div`
   grid-area: workspace;
 
-  width: 100vw;
   display: flex;
 `;
 export const App = () => {

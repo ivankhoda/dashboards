@@ -1,8 +1,21 @@
 import { DatePicker, Space } from "antd";
 import React, { useEffect, useState } from "react";
+import styled from "styled-components";
 import { StyledDashboard } from "../Dashboard/StyledDashboard";
-import { StockCard, StockInfo } from "../StockCard/StockCard";
+import { StatisticsTable } from "../StatisticsTable/StatisticsTable";
+import { StockCard } from "../StockCard/StockCard";
+import { StockInfo } from "../StockInfoHelpers";
 import { StyledStatistics } from "./StyledStatistics";
+
+const StyledStatisticsData = styled.div`
+  table tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+  }
+
+  table tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+  }
+`;
 
 export const Statistics = () => {
   const [prices, setPrices] = useState<StockInfo[]>([]);
@@ -46,6 +59,10 @@ export const Statistics = () => {
         ) : (
           <div>Loading...</div>
         )}
+
+        <StyledStatisticsData>
+          <StatisticsTable />
+        </StyledStatisticsData>
       </StyledDashboard>
     </StyledStatistics>
   );

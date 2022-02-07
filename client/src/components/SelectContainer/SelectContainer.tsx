@@ -7,8 +7,9 @@ export const selectCurrency = (currency: string) => {
 };
 export const SelectContainer = () => {
   const defaultCurrency = store.getState().setCurrency;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currency, setCurrency] = useState(defaultCurrency);
-  console.log(currency);
+
   const { Option } = Select;
 
   const handleChange = (value: string) => {

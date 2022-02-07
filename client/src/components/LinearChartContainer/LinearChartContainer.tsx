@@ -21,8 +21,7 @@ export const LinearChartContainer = (props: IntervalInfo) => {
   const currency = store.getState().setCurrency;
   const [chartData, setChartData] = useState({});
   const [suffix] = useState(currency);
-
-  console.log(suffix);
+  console.log(suffix, currency);
   const [legendCoordinates] = useState({
     align: "center",
     verticalAlign: "top",
@@ -71,7 +70,7 @@ export const LinearChartContainer = (props: IntervalInfo) => {
     fetchData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateEnd, dateStart, pointInterval, intervals, suffix]);
+  }, [dateEnd, dateStart, pointInterval, intervals, suffix, currency]);
 
   return (
     <StyledLinearChartContainer>
