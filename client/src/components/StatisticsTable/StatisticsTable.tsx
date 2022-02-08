@@ -1,3 +1,4 @@
+import { Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { store } from "../../store";
 import { Caret } from "../StockCard/Icons";
@@ -70,6 +71,8 @@ export const StatisticsTable = () => {
           </tr>
         )}
       </tbody>
+
+      <Table />
     </StyledStatisticsTable>
   );
 };
