@@ -21,10 +21,10 @@ export const StyledStatisticsTable = styled.table`
     border-bottom-left-radius: 8px !important;
   }
 
-  .ant-table-cell tr {
+  .ant-table-cell {
     min-width: 241px;
     min-height: 48px;
-    background-color: #ececff;
+
     text-align: start;
     padding-left: 12px;
   }
