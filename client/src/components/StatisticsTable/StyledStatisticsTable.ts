@@ -3,27 +3,49 @@ import styled from "styled-components";
 export const StyledStatisticsTable = styled.table`
   min-width: 1024px;
   margin-top: 16px;
-  tr {
+  /*  */
+
+  .ant-table-thead th {
+    background-color: #ececff;
   }
-  th {
+  .ant-table-thead th:last-child {
+    border-top-right-radius: 8px !important;
+  }
+  .ant-table-thead th:first-child {
+    border-top-left-radius: 8px !important;
+  }
+  .ant-table {
+    border-top-right-radius: 8px !important;
+    border-top-left-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+    border-bottom-left-radius: 8px !important;
+  }
+
+  .ant-table-cell tr {
     min-width: 241px;
     min-height: 48px;
-    background: #ececff;
+    background-color: #ececff;
     text-align: start;
     padding-left: 12px;
   }
-  th:last-child {
+  .ant-table-tbody th:last-child {
     border-top-right-radius: 10px;
   }
-  th:first-child {
+  .ant-table-tbody > th:first-child {
     border-top-left-radius: 10px;
   }
-  td {
-    background: #ffffff;
-    padding-left: 12px;
-    font-style: "Roboto";
-    line-height: 22px;
-    height: 48px;
+  .ant-pagination-item-active a {
+    color: #8f00ff;
+    border-color: #8f00ff;
+  }
+  .ant-pagination-item-active {
+    border-color: #8f00ff;
+  }
+  .ant-pagination-item:hover {
+    border-color: #8f00ff;
+  }
+  .ant-pagination-item a:hover {
+    color: #8f00ff;
   }
   .positive {
     color: #52c41a;

@@ -3,6 +3,7 @@ export type StockInfo = {
   name: string;
   currentPrice: number;
   previousPrice: number;
+  render?: void;
 };
 export const getDifference = (currentValue: number, previousValue: number) => {
   const result = ((currentValue - previousValue) / currentValue) * 100.0;

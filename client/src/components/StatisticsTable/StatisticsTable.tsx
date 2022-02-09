@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table } from "antd";
 import React, { useEffect, useState } from "react";
 import { store } from "../../store";
@@ -8,7 +9,50 @@ import { StyledStatisticsTable } from "./StyledStatisticsTable";
 export const StatisticsTable = () => {
   const [data, setData] = useState<StockInfo[]>([]);
   const [currency] = useState(store.getState().setCurrency);
-
+  console.log(currency);
+  const columns = [
+    {
+      title: "Name",
+      dataIndex: "name",
+      key: "name",
+    },
+    {
+      title: "Current price",
+      dataIndex: "currentPrice",
+      render: (text: any, record: any) => (
+        <p>
+          {record.currentPrice}
+          &nbsp;
+          {currency}
+        </p>
+      ),
+    },
+    {
+      title: "Previous price",
+      dataIndex: "previousPrice",
+      render: (text: any, record: any) => (
+        <p>
+          {record.previousPrice}
+          &nbsp;
+          {currency}
+        </p>
+      ),
+    },
+    {
+      title: "",
+      key: "skunk",
+      render: (text: any, record: any) => {
+        const difference = getDifference(record.currentPrice, record.previousPrice);
+        return (
+          <td className={`${checkIfValueIsNegative(difference)}`}>
+            <Caret className={checkIfValueIsNegative(difference)} />
+            &nbsp;&nbsp;
+            {numberTofixedDigits(difference, 2)}%
+          </td>
+        );
+      },
+    },
+  ];
   useEffect(() => {
     const fetchGoodsPrices = async () => {
       const result = await fetch("http://localhost:8000/statistics", {
@@ -16,63 +60,15 @@ export const StatisticsTable = () => {
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
       });
+
       setData(await result.json());
     };
     fetchGoodsPrices();
   }, []);
 
-  const TableElement = (props: StockInfo) => {
-    const { name, currentPrice, previousPrice } = props;
-    const difference = getDifference(currentPrice, previousPrice);
-    return (
-      <tr>
-        <td>{name}</td>
-        <td>
-          {currentPrice}
-          &nbsp;
-          {currency}
-        </td>
-        <td>
-          {previousPrice} &nbsp;{currency}
-        </td>
-        <td className={`${checkIfValueIsNegative(difference)}`}>
-          <Caret className={checkIfValueIsNegative(difference)} />
-          &nbsp;&nbsp;
-          {numberTofixedDigits(difference, 2)}%
-        </td>
-      </tr>
-    );
-  };
-
   return (
     <StyledStatisticsTable>
-      <tbody>
-        <tr>
-          <th>Name</th>
-          <th>Value</th>
-          <th>Previos value</th>
-          <th></th>
-        </tr>
-        {data.length !== 0 ? (
-          data.map((item) => (
-            <TableElement
-              key={item.name}
-              name={item.name}
-              currentPrice={item.currentPrice}
-              previousPrice={item.previousPrice}
-            />
-          ))
-        ) : (
-          <tr>
-            <th>Loading...</th>
-            <th>Loading...</th>
-            <th>Loading...</th>
-            <th>Loading...</th>
-          </tr>
-        )}
-      </tbody>
-
-      <Table />
+      <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
     </StyledStatisticsTable>
   );
 };
