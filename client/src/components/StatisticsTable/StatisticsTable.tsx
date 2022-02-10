@@ -1,6 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table } from "antd";
 import React, { useEffect, useState } from "react";
+import { connect } from "react-redux";
+import { setCurrency } from "../../reducers";
 import { store } from "../../store";
 import { Caret } from "../StockCard/Icons";
 import { checkIfValueIsNegative, getDifference, numberTofixedDigits, StockInfo } from "../StockInfoHelpers";
@@ -8,19 +10,20 @@ import { StyledStatisticsTable } from "./StyledStatisticsTable";
 
 export const StatisticsTable = () => {
   const [data, setData] = useState<StockInfo[]>([]);
-  const [currency] = useState(store.getState().setCurrency);
-  console.log(currency);
+
+  const currency = store.getState().setCurrency;
+
   const columns = [
     {
       title: "Name",
       dataIndex: "name",
-      key: "name",
     },
     {
       title: "Current price",
       dataIndex: "currentPrice",
+
       render: (text: any, record: any) => (
-        <p>
+        <p key={record.index}>
           {record.currentPrice}
           &nbsp;
           {currency}
@@ -30,8 +33,9 @@ export const StatisticsTable = () => {
     {
       title: "Previous price",
       dataIndex: "previousPrice",
+
       render: (text: any, record: any) => (
-        <p>
+        <p key={record.index}>
           {record.previousPrice}
           &nbsp;
           {currency}
@@ -40,15 +44,15 @@ export const StatisticsTable = () => {
     },
     {
       title: "",
-      key: "skunk",
+      key: "index",
       render: (text: any, record: any) => {
         const difference = getDifference(record.currentPrice, record.previousPrice);
         return (
-          <td className={`${checkIfValueIsNegative(difference)}`}>
-            <Caret className={checkIfValueIsNegative(difference)} />
+          <p className={`${checkIfValueIsNegative(difference)}`} key={record.index}>
+            <Caret className={checkIfValueIsNegative(difference)} key={record.index} />
             &nbsp;&nbsp;
             {numberTofixedDigits(difference, 2)}%
-          </td>
+          </p>
         );
       },
     },
@@ -72,3 +76,10 @@ export const StatisticsTable = () => {
     </StyledStatisticsTable>
   );
 };
+const mapStateToProps = (state: any) => {
+  return {
+    currecy: setCurrency(state),
+  };
+};
+
+connect(mapStateToProps)(StatisticsTable);

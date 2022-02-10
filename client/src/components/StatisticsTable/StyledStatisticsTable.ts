@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StyledStatisticsTable = styled.table`
+export const StyledStatisticsTable = styled.div`
   min-width: 1024px;
   margin-top: 16px;
   /*  */
@@ -24,7 +24,6 @@ export const StyledStatisticsTable = styled.table`
   .ant-table-cell {
     min-width: 241px;
     min-height: 48px;
-
     text-align: start;
     padding-left: 12px;
   }

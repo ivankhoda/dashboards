@@ -2,6 +2,7 @@
 import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css";
 import React, { useState } from "react";
+import { store } from "../../store";
 import { ChartsContainer } from "../ChartsContainer/ChartsContainer";
 import { oneDay, oneHour } from "../ChartsHelpers";
 import { LinearChartContainer } from "../LinearChartContainer/LinearChartContainer";
@@ -15,7 +16,9 @@ export const Dashboard = () => {
     pointInterval: oneDay,
     intervals: 8,
   });
-
+  store.subscribe(() => {
+    console.log(store.getState(), "suscribe in dashbord");
+  });
   const calculateInterval = (firstDate: any, nextDate: any) => {
     const differenceInDays = (nextDate - firstDate) / oneDay;
     const differenceInHours = (nextDate - firstDate) / oneHour;

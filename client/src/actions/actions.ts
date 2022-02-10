@@ -1,2 +1,1 @@
-export const EURO = "EURO";
-export const USD = "USD";
+export const SET_CURRENCY = "set_currency";

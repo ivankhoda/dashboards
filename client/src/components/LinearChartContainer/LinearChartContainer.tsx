@@ -18,10 +18,10 @@ interface IntervalInfo {
 
 export const LinearChartContainer = (props: IntervalInfo) => {
   const { pointInterval, dateStart, dateEnd, intervals } = props;
-  const currency = store.getState().setCurrency;
+
   const [chartData, setChartData] = useState({});
-  const [suffix] = useState(currency);
-  console.log(suffix, currency);
+  const [suffix] = useState(store.getState().setCurrency);
+
   const [legendCoordinates] = useState({
     align: "center",
     verticalAlign: "top",
@@ -70,7 +70,7 @@ export const LinearChartContainer = (props: IntervalInfo) => {
     fetchData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateEnd, dateStart, pointInterval, intervals, suffix, currency]);
+  }, [dateEnd, dateStart, pointInterval, intervals, suffix]);
 
   return (
     <StyledLinearChartContainer>

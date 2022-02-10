@@ -1,20 +1,16 @@
 import { Select } from "antd";
-import React, { useState } from "react";
+import React from "react";
+import { SET_CURRENCY } from "../../actions/actions";
 import { store } from "../../store";
 import { StyledSelectContainer } from "./StyledSelectConatiner";
 export const selectCurrency = (currency: string) => {
-  return { type: currency };
+  return { type: SET_CURRENCY, payload: currency };
 };
 export const SelectContainer = () => {
-  const defaultCurrency = store.getState().setCurrency;
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [currency, setCurrency] = useState(defaultCurrency);
-
   const { Option } = Select;
 
   const handleChange = (value: string) => {
     store.dispatch(selectCurrency(value));
-    setCurrency(store.getState().setCurrency);
   };
 
   return (
@@ -25,8 +21,8 @@ export const SelectContainer = () => {
         onChange={handleChange}
         defaultValue="USD"
       >
-        <Option value="EURO">EUR</Option>
-        <Option value="USD">USD</Option>
+        <Option value="€">EUR</Option>
+        <Option value="$">USD</Option>
       </Select>
     </StyledSelectContainer>
   );
