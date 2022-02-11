@@ -11,8 +11,10 @@ import { StyledStatisticsTable } from "./StyledStatisticsTable";
 export const StatisticsTable = () => {
   const [data, setData] = useState<StockInfo[]>([]);
 
-  const currency = store.getState().setCurrency;
-
+  //const currency = store.getState().setCurrency;
+  store.subscribe(() => {
+    console.log(store.getState(), "suscribe in stats");
+  });
   const columns = [
     {
       title: "Name",
@@ -26,7 +28,7 @@ export const StatisticsTable = () => {
         <p key={record.index}>
           {record.currentPrice}
           &nbsp;
-          {currency}
+          {store.getState().setCurrency}
         </p>
       ),
     },
@@ -38,7 +40,7 @@ export const StatisticsTable = () => {
         <p key={record.index}>
           {record.previousPrice}
           &nbsp;
-          {currency}
+          {store.getState().setCurrency}
         </p>
       ),
     },
@@ -77,8 +79,9 @@ export const StatisticsTable = () => {
   );
 };
 const mapStateToProps = (state: any) => {
+  console.log(state, "state map state");
   return {
-    currecy: setCurrency(state),
+    currency: setCurrency(state),
   };
 };
 
