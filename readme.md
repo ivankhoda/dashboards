@@ -36,9 +36,8 @@ npm run start
 
 ## Tech debts/bugs
 
-- Redux doesn't update state immediately (TODO: Add context provider)
-- Date picker range works the wrong way (TODO: Fix)
-- No pagination at the table component (TODO: Fix)
+- Redux doesn't update state immediately (TODO: Add context provider, connect(?))
+- Date picker range works wrong way (TODO: Fix)
 
 ## Help
 
