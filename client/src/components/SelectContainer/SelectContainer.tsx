@@ -1,5 +1,6 @@
 import { Select } from "antd";
 import React from "react";
+import { connect } from "react-redux";
 import { SET_CURRENCY } from "../../actions/actions";
 import { store } from "../../store";
 import { StyledSelectContainer } from "./StyledSelectConatiner";
@@ -27,3 +28,5 @@ export const SelectContainer = () => {
     </StyledSelectContainer>
   );
 };
+
+export default connect(null, { SET_CURRENCY })(SelectContainer);

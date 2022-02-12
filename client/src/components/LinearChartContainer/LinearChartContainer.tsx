@@ -2,7 +2,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import { setCurrency } from "../../reducers";
+import { SET_CURRENCY } from "../../actions/actions";
 import { store } from "../../store";
 import { linearChartOptions } from "../ChartsHelpers";
 import { StyledLinearChartContainer } from "./StyledLinearChartContainer";
@@ -80,12 +80,12 @@ export const LinearChartContainer = (props: IntervalInfo) => {
     </StyledLinearChartContainer>
   );
 };
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const mapStateToProps = (state: any) => {
-  console.log(state, "state map state");
-  return {
-    currency: setCurrency(state),
-  };
-};
+// // eslint-disable-next-line @typescript-eslint/no-explicit-any
+// const mapStateToProps = (state: any) => {
+//   console.log(state, "state map state");
+//   return {
+//     currency: setCurrency(state),
+//   };
+// };
 
-connect(mapStateToProps)(LinearChartContainer);
+export default connect(null, { SET_CURRENCY })(LinearChartContainer);

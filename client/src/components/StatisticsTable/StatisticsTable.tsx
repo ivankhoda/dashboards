@@ -11,7 +11,7 @@ import { StyledStatisticsTable } from "./StyledStatisticsTable";
 export const StatisticsTable = () => {
   const [data, setData] = useState<StockInfo[]>([]);
 
-  //const currency = store.getState().setCurrency;
+  const currency = store.getState().setCurrency;
   store.subscribe(() => {
     console.log(store.getState(), "suscribe in stats");
   });
@@ -28,7 +28,7 @@ export const StatisticsTable = () => {
         <p key={record.index}>
           {record.currentPrice}
           &nbsp;
-          {store.getState().setCurrency}
+          {currency}
         </p>
       ),
     },
@@ -40,7 +40,7 @@ export const StatisticsTable = () => {
         <p key={record.index}>
           {record.previousPrice}
           &nbsp;
-          {store.getState().setCurrency}
+          {currency}
         </p>
       ),
     },
@@ -79,10 +79,11 @@ export const StatisticsTable = () => {
   );
 };
 const mapStateToProps = (state: any) => {
+  const { currency } = state;
   console.log(state, "state map state");
   return {
-    currency: setCurrency(state),
+    currency: setCurrency(state, currency),
   };
 };
 
-connect(mapStateToProps)(StatisticsTable);
+export default connect(mapStateToProps)(StatisticsTable);
