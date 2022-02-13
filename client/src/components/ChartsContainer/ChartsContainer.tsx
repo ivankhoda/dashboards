@@ -13,6 +13,25 @@ const sortData = (arr: CountryInfo[]) => {
   return arr.sort((a: CountryInfo, b: CountryInfo) => (a.currentPrice < b.currentPrice ? 1 : -1));
 };
 
+const zones = [
+  {
+    value: 1,
+    color: "#2100EE",
+  },
+  {
+    value: 2,
+    color: "#6900EE",
+  },
+  {
+    value: 3,
+    color: "#EE0056",
+  },
+  {
+    value: 4,
+    color: "#EE9D00",
+  },
+];
+
 export const ChartsContainer = () => {
   const [chartData, setChartData] = useState({});
   useEffect(() => {
@@ -36,24 +55,7 @@ export const ChartsContainer = () => {
         dataSorting: {
           enabled: true,
         },
-        zones: [
-          {
-            value: 1,
-            color: "#2100EE",
-          },
-          {
-            value: 2,
-            color: "#6900EE",
-          },
-          {
-            value: 3,
-            color: "#EE0056",
-          },
-          {
-            value: 4,
-            color: "#EE9D00",
-          },
-        ],
+        zones: [...zones],
         data: valueList,
       };
 
