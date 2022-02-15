@@ -1,5 +1,6 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
+import moment from "moment";
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { SET_CURRENCY } from "../../actions/actions";
@@ -21,6 +22,8 @@ interface IntervalInfo {
 export const LinearChartContainer = (props: IntervalInfo) => {
   const { pointInterval, dateStart, dateEnd, intervals } = props;
 
+  console.log(moment.utc(dateStart).format(), "date start");
+
   const [chartData, setChartData] = useState({});
   const [suffix] = useState(store.getState().setCurrency);
 
@@ -32,11 +35,14 @@ export const LinearChartContainer = (props: IntervalInfo) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch(`http://localhost:8000/lines?interval=${intervals}`, {
-        method: "GET",
-        credentials: "same-origin",
-        headers: { "Content-Type": "application/json" },
-      });
+      const result = await fetch(
+        `http://localhost:8000/lines?From=${moment.utc(dateStart).format()}&To=${moment.utc(dateEnd).format()}`,
+        {
+          method: "GET",
+          credentials: "same-origin",
+          headers: { "Content-Type": "application/json" },
+        }
+      );
       const rawData = await result.json();
 
       const maxValues: number[] = [];

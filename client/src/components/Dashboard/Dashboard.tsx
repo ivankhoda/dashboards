@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { DatePicker, Space } from "antd";
 import "antd/dist/antd.css";
+import moment from "moment";
 import React, { useState } from "react";
 import { store } from "../../store";
 import { ChartsContainer } from "../ChartsContainer/ChartsContainer";
@@ -36,7 +37,7 @@ export const Dashboard = () => {
   const onChange = (range: any) => {
     const firstDate = range[0]._d;
     const nextDate = range[1]._d;
-
+    console.log(moment.utc(firstDate).format(), "date");
     const intervals = calculateInterval(firstDate, nextDate);
     const newChartOptions = {
       dateStart: firstDate,
