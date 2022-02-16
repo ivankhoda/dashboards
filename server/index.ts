@@ -97,9 +97,26 @@ app.get("/statistics", (req: any, res: any) => {
 });
 
 app.get("/lines", (req: any, res: any) => {
-  const interval = req.query.interval;
+  const dateFrom = new Date(req.query.From);
+  const dateTo = new Date(req.query.To);
 
-  const result = generateQuantityOfRandomNumber(lines, interval);
+  const calculateTime = (firstDate: any, nextDate: any) => {
+    const oneDay = 24 * 60 * 60 * 1000;
+    const oneHour = 60 * 60 * 1000;
+    const differenceInDays = (nextDate - firstDate) / oneDay;
+    const differenceInHours = (nextDate - firstDate) / oneHour;
+    const wholeDay = 1;
+
+    let period;
+    let time;
+    differenceInDays >= wholeDay
+      ? ((period = Math.floor(differenceInDays)), (time = "days"))
+      : ((period = Math.floor(differenceInHours)), (time = "hours"));
+    return { period, time };
+  };
+  const intervals = calculateTime(dateFrom, dateTo);
+
+  const result = generateQuantityOfRandomNumber(lines, intervals.period);
 
   res.json(result);
 });
