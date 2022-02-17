@@ -64,7 +64,7 @@ type IntervalInfo = {
   interval: number;
   price: number;
 };
-const generateQuantityOfRandomNumber = (lines: string[], interval: number) => {
+const generateQuantityOfRandomNumber = (lines: string[], interval: number, start?: number) => {
   const generateFakePrice = () => randomValueBetweenInterval(1, 150);
 
   const dataSets: any = [];
@@ -77,6 +77,7 @@ const generateQuantityOfRandomNumber = (lines: string[], interval: number) => {
     }
     dataSets.push({
       name: line,
+      start: start,
       data: values,
     });
   });
@@ -99,7 +100,7 @@ app.get("/statistics", (req: any, res: any) => {
 app.get("/lines", (req: any, res: any) => {
   const dateFrom = new Date(req.query.From);
   const dateTo = new Date(req.query.To);
-
+  console.log(req.query);
   const calculateTime = (firstDate: any, nextDate: any) => {
     const oneDay = 24 * 60 * 60 * 1000;
     const oneHour = 60 * 60 * 1000;
@@ -116,7 +117,7 @@ app.get("/lines", (req: any, res: any) => {
   };
   const intervals = calculateTime(dateFrom, dateTo);
 
-  const result = generateQuantityOfRandomNumber(lines, intervals.period);
+  const result = generateQuantityOfRandomNumber(lines, intervals.period, dateFrom.getTime());
 
   res.json(result);
 });

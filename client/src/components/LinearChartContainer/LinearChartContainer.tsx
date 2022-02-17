@@ -8,22 +8,15 @@ import { store } from "../../store";
 import { linearChartOptions } from "../ChartsHelpers";
 import { StyledLinearChartContainer } from "./StyledLinearChartContainer";
 
-const valueComparison = (arr: number[]) => {
-  const max = Math.max(...arr);
-  return max;
-};
 interface IntervalInfo {
-  intervals: number;
-  dateStart: number;
-  dateEnd: number;
+  dateStart?: number;
+  dateEnd?: number;
   pointInterval: number;
 }
 
 export const LinearChartContainer = (props: IntervalInfo) => {
-  const { pointInterval, dateStart, dateEnd, intervals } = props;
-
-  console.log(moment.utc(dateStart).format(), "date start");
-
+  const { pointInterval, dateStart, dateEnd } = props;
+  console.log(moment.utc(dateStart).format(), dateStart, "date start");
   const [chartData, setChartData] = useState({});
   const [suffix] = useState(store.getState().setCurrency);
 
@@ -45,14 +38,6 @@ export const LinearChartContainer = (props: IntervalInfo) => {
       );
       const rawData = await result.json();
 
-      const maxValues: number[] = [];
-
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      rawData.forEach((element: any) => {
-        const maxValue: number = valueComparison(element.data);
-        maxValues.push(maxValue);
-      });
-
       const newOptions = {
         ...linearChartOptions,
         legend: legendCoordinates,
@@ -66,19 +51,23 @@ export const LinearChartContainer = (props: IntervalInfo) => {
               valueSuffix: suffix,
             },
             pointStart: dateStart,
-            pointEnd: dateEnd,
             pointInterval: pointInterval,
           },
         },
         series: rawData,
       };
+      console.log(
+        newOptions,
+
+        "point start"
+      );
 
       setChartData(newOptions);
     };
     fetchData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateEnd, dateStart, pointInterval, intervals, suffix]);
+  }, [dateEnd]);
 
   return (
     <StyledLinearChartContainer>
