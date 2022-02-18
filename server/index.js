@@ -43,7 +43,7 @@ var generateFakePrices = function (items, limit) {
     return values;
 };
 var lines = ["Line 1", "Line 2", "Line 3"];
-var generateQuantityOfRandomNumber = function (lines, interval) {
+var generateQuantityOfRandomNumber = function (lines, interval, start) {
     var generateFakePrice = function () { return randomValueBetweenInterval(1, 150); };
     var dataSets = [];
     lines.forEach(function (line) {
@@ -54,6 +54,7 @@ var generateQuantityOfRandomNumber = function (lines, interval) {
         }
         dataSets.push({
             name: line,
+            start: start,
             data: values
         });
     });
@@ -70,8 +71,7 @@ app.get("/statistics", function (req, res) {
 app.get("/lines", function (req, res) {
     var dateFrom = new Date(req.query.From);
     var dateTo = new Date(req.query.To);
-    var Difference_In_Time = dateTo.getTime() - dateFrom.getTime();
-    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
+    console.log(req.query);
     var calculateTime = function (firstDate, nextDate) {
         var oneDay = 24 * 60 * 60 * 1000;
         var oneHour = 60 * 60 * 1000;
@@ -86,10 +86,7 @@ app.get("/lines", function (req, res) {
         return { period: period, time: time };
     };
     var intervals = calculateTime(dateFrom, dateTo);
-    console.log(Difference_In_Days);
-    console.log(intervals);
-    console.log(dateFrom, dateTo, "date back");
-    var result = generateQuantityOfRandomNumber(lines, 7);
+    var result = generateQuantityOfRandomNumber(lines, intervals.period, dateFrom.getTime());
     res.json(result);
 });
 app.get("/countries", function (req, res) {

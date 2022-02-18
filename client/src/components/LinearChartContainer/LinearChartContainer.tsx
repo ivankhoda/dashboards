@@ -16,7 +16,7 @@ interface IntervalInfo {
 
 export const LinearChartContainer = (props: IntervalInfo) => {
   const { pointInterval, dateStart, dateEnd } = props;
-  console.log(moment.utc(dateStart).format(), dateStart, "date start");
+
   const [chartData, setChartData] = useState({});
   const [suffix] = useState(store.getState().setCurrency);
 
@@ -56,11 +56,6 @@ export const LinearChartContainer = (props: IntervalInfo) => {
         },
         series: rawData,
       };
-      console.log(
-        newOptions,
-
-        "point start"
-      );
 
       setChartData(newOptions);
     };

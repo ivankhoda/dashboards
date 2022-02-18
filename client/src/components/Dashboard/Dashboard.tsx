@@ -10,8 +10,8 @@ import { StyledDashboard, StyledWorkingPanel } from "./StyledDashboard";
 
 export const Dashboard = () => {
   const [chartOptions, setChartOptions] = useState({
-    //dateStart: Date.now() - oneDay * 7,
-    // dateEnd: Date.now(),
+    dateStart: Date.now() - oneDay * 7,
+    dateEnd: Date.now(),
     pointInterval: oneDay,
   });
 
@@ -58,10 +58,9 @@ export const Dashboard = () => {
           <ChartsContainer />
 
           <LinearChartContainer
-            {...chartOptions}
-            // dateStart={chartOptions.dateStart}
-            // dateEnd={chartOptions.dateEnd}
-            // pointInterval={chartOptions.pointInterval}
+            dateStart={chartOptions.dateStart}
+            dateEnd={chartOptions.dateEnd}
+            pointInterval={chartOptions.pointInterval}
           />
         </StyledWorkingPanel>
       </StyledDashboard>
