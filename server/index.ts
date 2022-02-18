@@ -77,7 +77,7 @@ const generateQuantityOfRandomNumber = (lines: string[], interval: number, start
     }
     dataSets.push({
       name: line,
-      start: start,
+      pointStart: start,
       data: values,
     });
   });
@@ -100,7 +100,7 @@ app.get("/statistics", (req: any, res: any) => {
 app.get("/lines", (req: any, res: any) => {
   const dateFrom = new Date(req.query.From);
   const dateTo = new Date(req.query.To);
-  console.log(req.query);
+
   const calculateTime = (firstDate: any, nextDate: any) => {
     const oneDay = 24 * 60 * 60 * 1000;
     const oneHour = 60 * 60 * 1000;
@@ -111,8 +111,9 @@ app.get("/lines", (req: any, res: any) => {
     let period;
     let time;
     differenceInDays >= wholeDay
-      ? ((period = Math.floor(differenceInDays)), (time = "days"))
+      ? ((period = Math.ceil(differenceInDays)), (time = "days"))
       : ((period = Math.floor(differenceInHours)), (time = "hours"));
+
     return { period, time };
   };
   const intervals = calculateTime(dateFrom, dateTo);
