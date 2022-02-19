@@ -1,1 +1,1 @@
-export const SET_CURRENCY = "set_currency";
+export const SELECT_CURRENCY = "select_currency";

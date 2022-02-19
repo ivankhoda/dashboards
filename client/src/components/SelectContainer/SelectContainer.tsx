@@ -1,19 +1,25 @@
 import { Select } from "antd";
-import React from "react";
-import { connect } from "react-redux";
-import { SET_CURRENCY } from "../../actions/actions";
-import { store } from "../../store";
+import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { SELECT_CURRENCY } from "../../actions/actions";
+import { RootState } from "../../reducers/reducer";
 import { StyledSelectContainer } from "./StyledSelectConatiner";
+
 export const selectCurrency = (currency: string) => {
-  return { type: SET_CURRENCY, payload: currency };
+  return { type: SELECT_CURRENCY, payload: currency };
 };
 export const SelectContainer = () => {
   const { Option } = Select;
+  const dispatch = useDispatch();
 
+  const [currency, setCurrency] = useState("");
+  console.log(currency);
   const handleChange = (value: string) => {
-    store.dispatch(selectCurrency(value));
+    dispatch(selectCurrency(value));
+    setCurrency(value);
   };
-
+  const currencyData = useSelector((state: RootState) => state.currencies);
+  console.log(currencyData);
   return (
     <StyledSelectContainer>
       <h3>Currency</h3>
@@ -22,11 +28,16 @@ export const SelectContainer = () => {
         onChange={handleChange}
         defaultValue="USD"
       >
-        <Option value="€">EUR</Option>
-        <Option value="$">USD</Option>
+        {Array.isArray(currencyData) ? (
+          currencyData.map((currency) => (
+            <Option key={currency.value} value={currency.value}>
+              {currency.name}
+            </Option>
+          ))
+        ) : (
+          <></>
+        )}
       </Select>
     </StyledSelectContainer>
   );
 };
-
-export default connect(null, { SET_CURRENCY })(SelectContainer);

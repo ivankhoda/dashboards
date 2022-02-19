@@ -1,31 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Table } from "antd";
 import React, { useEffect, useState } from "react";
-import { connect } from "react-redux";
-import { setCurrency } from "../../reducers";
-import { store } from "../../store";
+import { useSelector } from "react-redux";
+import { RootState } from "../../reducers/reducer";
 import { Caret } from "../StockCard/Icons";
 import { checkIfValueIsNegative, getDifference, numberTofixedDigits, StockInfo } from "../StockInfoHelpers";
 import { StyledStatisticsTable } from "./StyledStatisticsTable";
 
 export const StatisticsTable = () => {
   const [data, setData] = useState<StockInfo[]>([]);
+  const currency = useSelector((state: RootState) => state.currency);
 
-  const currency = store.getState().setCurrency;
-  store.subscribe(() => {
-    console.log(store.getState(), "suscribe in stats");
-  });
   const columns = [
     {
       title: "Name",
       dataIndex: "name",
+      //key: "name",
     },
     {
       title: "Current price",
       dataIndex: "currentPrice",
-
+      // key: "crnt",
       render: (text: any, record: any) => (
-        <p key={record.index}>
+        <p key={record.currentPrice}>
           {record.currentPrice}
           &nbsp;
           {currency}
@@ -35,9 +32,9 @@ export const StatisticsTable = () => {
     {
       title: "Previous price",
       dataIndex: "previousPrice",
-
+      // key: "prv",
       render: (text: any, record: any) => (
-        <p key={record.index}>
+        <p key={record.previousPrice}>
           {record.previousPrice}
           &nbsp;
           {currency}
@@ -46,7 +43,7 @@ export const StatisticsTable = () => {
     },
     {
       title: "",
-      key: "index",
+      // key: "index",
       render: (text: any, record: any) => {
         const difference = getDifference(record.currentPrice, record.previousPrice);
         return (
@@ -78,12 +75,3 @@ export const StatisticsTable = () => {
     </StyledStatisticsTable>
   );
 };
-const mapStateToProps = (state: any) => {
-  const { currency } = state;
-  console.log(state, "state map state");
-  return {
-    currency: setCurrency(state, currency),
-  };
-};
-
-export default connect(mapStateToProps)(StatisticsTable);

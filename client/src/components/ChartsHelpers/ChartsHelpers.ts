@@ -44,7 +44,7 @@ export const linearChartOptions = {
         valueSuffix: "$",
       },
 
-      pointInterval: 0,
+      pointInterval: oneDay,
     },
   },
   legend: {
@@ -59,19 +59,19 @@ export const linearChartOptions = {
 
   series: [
     {
-      start: 1358467200000,
+      pointStart: Date.now(),
       data: [1, 2, 3, 4, 30, 6, 7, 12, 9],
       name: "Line 1",
       color: "#FF0000",
     },
     {
-      start: 1358467200000,
+      pointStart: Date.now(),
       data: [5, 6, 7, 8, 9, 10, 11, 20, 13],
       name: "Line 2",
       color: "#42C86A",
     },
     {
-      start: 1358467200000,
+      pointStart: Date.now(),
       data: [9, 10, 11, 12, 8, 14, 15, 16, 17],
       name: "Line 3",
       color: "#1890FF",
