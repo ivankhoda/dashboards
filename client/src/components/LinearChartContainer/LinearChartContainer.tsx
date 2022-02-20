@@ -21,9 +21,7 @@ export const LinearChartContainer = (props: IntervalInfo) => {
 
   const [chartData, setChartData] = useState({});
   const currency = useSelector((state: RootState) => state.currency);
-  console.log(currency);
-  // const [suffix] = useState(currency);
-  // console.log(suffix, "suffix");
+
   const [legendCoordinates] = useState({
     align: "center",
     verticalAlign: "top",
@@ -62,7 +60,26 @@ export const LinearChartContainer = (props: IntervalInfo) => {
     fetchData();
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dateEnd, currency]);
+  }, [dateEnd]);
+  //Use effect for updating currency in linear chart. To update currency and data need to add currency as dependancy in the upper useState.
+
+  useEffect(() => {
+    const newOptions = {
+      ...chartData,
+
+      plotOptions: {
+        series: {
+          tooltip: {
+            valueDecimals: 1,
+            valueSuffix: currency,
+          },
+        },
+      },
+    };
+
+    setChartData(newOptions);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currency]);
 
   return (
     <StyledLinearChartContainer>

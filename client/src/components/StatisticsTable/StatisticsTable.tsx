@@ -14,13 +14,12 @@ export const StatisticsTable = () => {
   const columns = [
     {
       title: "Name",
-      dataIndex: "name",
-      //key: "name",
+
+      render: (text: any, record: any) => <p key={record.name}>{record.name}</p>,
     },
     {
       title: "Current price",
-      dataIndex: "currentPrice",
-      // key: "crnt",
+
       render: (text: any, record: any) => (
         <p key={record.currentPrice}>
           {record.currentPrice}
@@ -31,8 +30,7 @@ export const StatisticsTable = () => {
     },
     {
       title: "Previous price",
-      dataIndex: "previousPrice",
-      // key: "prv",
+
       render: (text: any, record: any) => (
         <p key={record.previousPrice}>
           {record.previousPrice}
@@ -43,7 +41,7 @@ export const StatisticsTable = () => {
     },
     {
       title: "",
-      // key: "index",
+
       render: (text: any, record: any) => {
         const difference = getDifference(record.currentPrice, record.previousPrice);
         return (
@@ -56,6 +54,7 @@ export const StatisticsTable = () => {
       },
     },
   ];
+
   useEffect(() => {
     const fetchGoodsPrices = async () => {
       const result = await fetch("http://localhost:8000/statistics", {
@@ -71,7 +70,7 @@ export const StatisticsTable = () => {
 
   return (
     <StyledStatisticsTable>
-      <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} />
+      <Table columns={columns} dataSource={data} pagination={{ pageSize: 5 }} rowKey="xxx" />
     </StyledStatisticsTable>
   );
 };

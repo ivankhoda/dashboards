@@ -12,14 +12,15 @@ export const SelectContainer = () => {
   const { Option } = Select;
   const dispatch = useDispatch();
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [currency, setCurrency] = useState("");
-  console.log(currency);
+
   const handleChange = (value: string) => {
     dispatch(selectCurrency(value));
     setCurrency(value);
   };
   const currencyData = useSelector((state: RootState) => state.currencies);
-  console.log(currencyData);
+
   return (
     <StyledSelectContainer>
       <h3>Currency</h3>
