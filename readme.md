@@ -36,9 +36,6 @@ npm run start
 
 ## Tech debts/bugs
 
-- Redux doesn't update state immediately (TODO: Add context provider, connect(?))
-- Date picker range works wrong way (TODO: Fix)
-
 ## Help
 
 You know how to find me:)
