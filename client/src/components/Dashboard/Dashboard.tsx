@@ -32,7 +32,6 @@ export const Dashboard = () => {
   const onChange = (range: any) => {
     const firstDate = new Date(range[0]._d).getTime();
     const nextDate = new Date(range[1]._d).getTime();
-    console.log(firstDate, "first date");
     const intervals = calculateInterval(firstDate, nextDate);
     const newChartOptions = {
       dateStart: firstDate,

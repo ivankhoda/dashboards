@@ -87,12 +87,5 @@ export const LinearChartContainer = (props: IntervalInfo) => {
     </StyledLinearChartContainer>
   );
 };
-// // eslint-disable-next-line @typescript-eslint/no-explicit-any
-// const mapStateToProps = (state: any) => {
-//   console.log(state, "state map state");
-//   return {
-//     currency: setCurrency(state),
-//   };
-// };
 
 export default connect(null, { SELECT_CURRENCY })(LinearChartContainer);
