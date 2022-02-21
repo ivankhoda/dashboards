@@ -21,13 +21,8 @@ export const PricesContainer = () => {
   return (
     <StyledPricesContainer>
       {prices.length !== 0 ? (
-        prices.map((item) => (
-          <StockCard
-            key={item.name}
-            name={item.name}
-            currentPrice={item.currentPrice}
-            previousPrice={item.previousPrice}
-          />
+        prices.map((item, i) => (
+          <StockCard key={i} name={item.name} currentPrice={item.currentPrice} previousPrice={item.previousPrice} />
         ))
       ) : (
         <div>
