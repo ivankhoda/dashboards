@@ -88,7 +88,7 @@ const generateQuantityOfRandomNumber = (lines: string[], interval: number, start
 app.get("/prices", (req: any, res: any) => {
   const result = generateFakePrices(goods, 20000);
 
-  res.json(result, "bank");
+  res.json(result);
 });
 
 app.get("/statistics", (req: any, res: any) => {
@@ -123,9 +123,26 @@ app.get("/lines", (req: any, res: any) => {
   res.json(result);
 });
 
+type CountryInfo = {
+  name: string;
+  currentPrice: number;
+};
 app.get("/countries", (req: any, res: any) => {
-  const result = generateFakePrices(countries, 10000);
+  const getPrices = generateFakePrices(countries, 10000);
+  const sortData = (arr: CountryInfo[], orderBy: string) => {
+    switch (orderBy) {
+      case "desc":
+        return arr.sort((a, b: CountryInfo) => (a.currentPrice < b.currentPrice ? 1 : -1));
 
+      case "asc":
+        return arr.sort((a, b: CountryInfo) => (a.currentPrice > b.currentPrice ? 1 : -1));
+
+      default:
+        return arr;
+    }
+  };
+  const result = sortData(getPrices, req.query.orderby);
+  console.log(result);
   res.json(result);
 });
 

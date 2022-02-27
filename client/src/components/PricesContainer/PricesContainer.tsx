@@ -5,7 +5,7 @@ import { useFetch } from "./useFetch";
 
 export const PricesContainer = () => {
   const { loading, data, error } = useFetch("http://localhost:8000/prices");
-  console.log(data, loading, error);
+
   if (error) return <h1>We have some troubles...</h1>;
   if (loading) return <h1>Loading...</h1>;
   return (

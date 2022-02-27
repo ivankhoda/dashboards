@@ -9,10 +9,6 @@ type CountryInfo = {
   currentPrice: number;
 };
 
-const sortData = (arr: CountryInfo[]) => {
-  return arr.sort((a: CountryInfo, b: CountryInfo) => (a.currentPrice < b.currentPrice ? 1 : -1));
-};
-
 const zones = [
   {
     value: 1,
@@ -36,15 +32,16 @@ export const ChartsContainer = () => {
   const [chartData, setChartData] = useState({});
   useEffect(() => {
     const fetchCountriesData = async () => {
-      const result = await fetch("http://localhost:8000/countries", {
+      const result = await fetch("http://localhost:8000/countries?orderby=asc", {
         method: "GET",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
       });
-      const rawData = await result.json();
+      const rawData: CountryInfo[] = await result.json();
+      console.log(rawData);
       const countryList: string[] = [];
       const valueList: number[] = [];
-      sortData(rawData).forEach((country) => {
+      rawData.forEach((country) => {
         countryList.push(country.name), valueList.push(country.currentPrice);
       });
       const newAxis = {
@@ -72,6 +69,8 @@ export const ChartsContainer = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  //const { loading, data, error } = useFetch("http://localhost:8000/countries");
 
   return (
     <StyledChartsContainer>
