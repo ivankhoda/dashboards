@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
+import { StockInfo } from "../StockInfoHelpers";
 export const useFetch = (uri: string) => {
-  const [data, setData] = useState();
+  const [data, setData] = useState<StockInfo[]>([]);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(true);
 
