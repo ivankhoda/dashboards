@@ -20,16 +20,6 @@ export const currencies = (state = initialState, action?: { type: string; payloa
 export const currency = (state = initialState[0].value, action?: { type: string; payload?: string }) => {
   switch (action?.type) {
     case SELECT_CURRENCY:
-      // action?.payload !== (null || undefined)
-      //   ? [
-      //       ...state,
-      //       {
-      //         currency: action.payload,
-      //       },
-      //     ]
-      //   : state;
-      console.log(action);
-
       action?.payload !== (null || undefined) ? (state = action.payload) : state;
     default:
       return state;

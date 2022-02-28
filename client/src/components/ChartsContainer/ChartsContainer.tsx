@@ -2,6 +2,7 @@ import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
 import { barChartOptions } from "../ChartsHelpers";
+import { useFetch } from "../PricesContainer/useFetch";
 import { StyledChartsContainer } from "./StyledChartsContainer";
 
 type CountryInfo = {
@@ -32,13 +33,13 @@ export const ChartsContainer = () => {
   const [chartData, setChartData] = useState({});
   useEffect(() => {
     const fetchCountriesData = async () => {
-      const result = await fetch("http://localhost:8000/countries?orderby=asc", {
+      const result = await fetch("http://localhost:8000/countries?orderby=desc", {
         method: "GET",
         credentials: "same-origin",
         headers: { "Content-Type": "application/json" },
       });
       const rawData: CountryInfo[] = await result.json();
-      console.log(rawData);
+
       const countryList: string[] = [];
       const valueList: number[] = [];
       rawData.forEach((country) => {
@@ -67,10 +68,10 @@ export const ChartsContainer = () => {
 
     fetchCountriesData();
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-nesxt-line react-hooks/exhaustive-deps
   }, []);
-
-  //const { loading, data, error } = useFetch("http://localhost:8000/countries");
+  const { loading, data, error } = useFetch("http://localhost:8000/countries?orderby=desc");
+  console.log(loading, data, error);
 
   return (
     <StyledChartsContainer>
