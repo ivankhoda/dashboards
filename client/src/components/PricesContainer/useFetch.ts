@@ -16,8 +16,8 @@ export const useFetch = (uri: string) => {
           credentials: "same-origin",
           headers: { "Content-Type": "application/json" },
         });
-        setLoading(false);
         setData(await result.json());
+        setLoading(false);
       } catch (error) {
         setError(true);
       }

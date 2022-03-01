@@ -1,8 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 import React, { useEffect, useState } from "react";
 import { barChartOptions } from "../ChartsHelpers";
-import { useFetch } from "../PricesContainer/useFetch";
 import { StyledChartsContainer } from "./StyledChartsContainer";
 
 type CountryInfo = {
@@ -67,11 +67,7 @@ export const ChartsContainer = () => {
     };
 
     fetchCountriesData();
-
-    // eslint-disable-nesxt-line react-hooks/exhaustive-deps
   }, []);
-  const { loading, data, error } = useFetch("http://localhost:8000/countries?orderby=desc");
-  console.log(loading, data, error);
 
   return (
     <StyledChartsContainer>
