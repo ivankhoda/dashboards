@@ -34,13 +34,6 @@ const rows = [
 const randomInt = (range: number) => Math.floor(Math.random() * range);
 const randomValueBetweenInterval = (max: number, min: number) => Math.floor(Math.random() * (max - min + 1)) + min;
 
-interface Array<T> {
-  pickRandom: () => string;
-}
-Array.prototype.pickRandom = function () {
-  return this[randomInt(this.length)];
-};
-
 interface Data {
   name: string;
   currentPrice: number;
@@ -142,7 +135,7 @@ app.get("/countries", (req: any, res: any) => {
     }
   };
   const result = sortData(getPrices, req.query.orderby);
-  console.log(result);
+
   res.json(result);
 });
 
